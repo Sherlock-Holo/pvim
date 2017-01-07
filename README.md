@@ -4,3 +4,7 @@
 脚本依赖一个程序: xclip
 
 感谢提供建议的@farseerfc, @FiveYellowMice, @Haruue Icymoon
+
+## 16.1.7
+
+添加PKGBUILD, 进入AUR
