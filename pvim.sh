@@ -3,8 +3,13 @@
 Input=$1
 Type=$2
 
+if [ $# != 2 ]; then
+        echo "You need to tell me the file's type(codes or pics)"
+        exit 1
+fi
+
 if [ $Type == "codes" ]; then
-    cat $Input | curl -F 'vimcn=<-' https://cfp.vim-cn.com/ | tee /dev/stderr | head -c -1 |xclip -sel c -i
+        cat $Input | curl -F 'vimcn=<-' https://cfp.vim-cn.com/ | tee /dev/stderr | head -c -1 |xclip -sel c -i
 fi
 
 if [ $Type == "pics" ]; then
