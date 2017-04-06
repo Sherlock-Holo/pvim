@@ -22,12 +22,12 @@ def upload_img(file, arg):
         return url
 
 def upload_text(file, arg):
-    #postfix = file.split('.')[-1]
+    postfix = file.split('.')[-1]
     with open(file, 'r') as f:
         ufile = requests.post(text_server, data = {arg: f.read()})
         url = ufile.text
         url = url.strip()
-        #url = url + "/{}".format(postfix)
+        url = url + "/{}".format(postfix)
         pyperclip.copy(url)
         return url
 
