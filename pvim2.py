@@ -3,20 +3,31 @@
 import requests
 import argparse
 import pyperclip
+from configparser import ConfigParser
 
-def upload_img(file):
+cfg = ConfigParser()
+cfg.read("pvim.conf")
+img_server = cfg.get('Server', 'img_server')
+text_server = cfg.get('Server', 'text_server')
+parameter = cfg.get('Parameter', 'arg')
+
+def upload_img(file, arg):
+    postfix = file.split('.')[-1]
     with open(file, 'rb') as f:
-        ufile = requests.post("https://img.vim-cn.com", files = {'vimcn': f})
+        ufile = requests.post(img_server, files = {arg: f})
         url = ufile.text
-        url = url.split()[0]
+        url = url.strip()
+        url = url + "/{}".format(postfix)
         pyperclip.copy(url)
         return url
 
-def upload_text(file):
+def upload_text(file, arg):
+    #postfix = file.split('.')[-1]
     with open(file, 'r') as f:
-        ufile = requests.post("https://cfp.vim-cn.com", data = {'vimcn': f.read()})
+        ufile = requests.post(text_server, data = {arg: f.read()})
         url = ufile.text
-        url = url.split()[0]
+        url = url.strip()
+        #url = url + "/{}".format(postfix)
         pyperclip.copy(url)
         return url
 
@@ -28,7 +39,10 @@ parser.add_argument('-p', '--picture', help = 'upload picture')
 args = parser.parse_args()
 
 if args.picture:
-    print(upload_img(args.picture))
+    print(upload_img(args.picture, parameter))
 
 elif args.text:
-    print(upload_text(args.text))
+    print(upload_text(args.text, parameter))
+
+# debug
+#print(parameter)
