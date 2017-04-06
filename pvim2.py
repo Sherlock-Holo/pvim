@@ -22,7 +22,7 @@ def upload_img(file, arg):
 def upload_text(file, arg):
     postfix = file.split('.')[-1]
     with open(file, 'r') as f:
-        ufile = requests.post(text_server, data = {arg: f.read()})
+        ufile = requests.post(text_server, data = {arg: f.read(),  'content_type': 'application/octet-stream'})
         url = ufile.text
         url = url.strip()
         url = url + "/{}".format(postfix)
