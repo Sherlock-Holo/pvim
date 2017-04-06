@@ -13,7 +13,7 @@ parameter = cfg.get('Parameter', 'arg')
 
 def upload_img(file, arg):
     with open(file, 'rb') as f:
-        ufile = requests.post(img_server, files = {'name': f.read(), 'content_type': 'application/octet-stream'})
+        ufile = requests.post(img_server, files = {arg: f.read(), 'content_type': 'application/octet-stream'})
         url = ufile.text.split()[-1]
         #url = url.strip()
         pyperclip.copy(url)
