@@ -10,6 +10,7 @@ setup(
     author_email = 'sherlockya@gmail.com',
     description = 'pvim python version',
     scripts = ['pvim2.py'],
+    data_files = [('/etc/pvim2', ['pvim2.conf'])],
     classifiers = [
         'License :: OSI Approved :: GPL-3.0 License',
         'Programming Language :: Python :: 3.6'

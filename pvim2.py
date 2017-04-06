@@ -6,7 +6,7 @@ import pyperclip
 from configparser import ConfigParser
 
 cfg = ConfigParser()
-cfg.read("pvim.conf")
+cfg.read("/etc/pvim2/pvim2.conf")
 img_server = cfg.get('Server', 'img_server')
 text_server = cfg.get('Server', 'text_server')
 parameter = cfg.get('Parameter', 'arg')
