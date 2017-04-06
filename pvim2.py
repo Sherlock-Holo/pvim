@@ -43,6 +43,3 @@ if args.picture:
 
 elif args.text:
     print(upload_text(args.text, parameter))
-
-# debug
-#print(parameter)
