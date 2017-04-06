@@ -12,12 +12,10 @@ text_server = cfg.get('Server', 'text_server')
 parameter = cfg.get('Parameter', 'arg')
 
 def upload_img(file, arg):
-    postfix = file.split('.')[-1]
     with open(file, 'rb') as f:
         ufile = requests.post(img_server, files = {arg: f})
         url = ufile.text
         url = url.strip()
-        url = url + "/{}".format(postfix)
         pyperclip.copy(url)
         return url
 
