@@ -5,11 +5,13 @@ import argparse
 import pyperclip
 from configparser import ConfigParser
 
+config = '/etc/pvim2/pvim2.conf'
 cfg = ConfigParser()
-cfg.read("/etc/pvim2/pvim2.conf")
-img_server = cfg.get('Server', 'img_server')
-text_server = cfg.get('Server', 'text_server')
-parameter = cfg.get('Parameter', 'arg')
+cfg.read(config)
+server = cfg.get('Setting', 'server')
+img_server = cfg.get(server, 'img_server')
+text_server = cfg.get(server, 'text_server')
+parameter = cfg.get(server, 'arg')
 
 def upload_img(file, arg):
     with open(file, 'rb') as f:
