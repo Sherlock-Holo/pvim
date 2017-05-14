@@ -37,3 +37,6 @@ optional arguments:
 python-requests
 
 python-pyperclip
+
+## Tips:
+python版本有隐藏玩法噢~
