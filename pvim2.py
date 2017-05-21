@@ -1,11 +1,15 @@
 #! /usr/bin/env python3
 
 import argparse
-import pyperclip
 import requests
 import sys
 from configparser import ConfigParser
 from time import time
+
+try:
+    import pyperclip
+except ImportError:
+    pass
 
 config = '/etc/pvim2/pvim2.conf'
 cfg = ConfigParser()
@@ -24,7 +28,12 @@ def upload_img(file, arg):
         usage_time = round(end_time - start_time, 2)
         print('upload time: {}s'.format(usage_time))
         #url = url.strip()
-        pyperclip.copy(url)
+
+        try:
+            pyperclip.copy(url)
+        except NameError:
+            pass
+
         return url
 
 def upload_text(file, arg):
@@ -38,7 +47,12 @@ def upload_text(file, arg):
         url = url + "/{}".format(postfix)
         usage_time = round(end_time - start_time, 2)
         print('upload time: {}s'.format(usage_time))
-        pyperclip.copy(url)
+
+        try:
+            pyperclip.copy(url)
+        except NameError:
+            pass
+
         return url
 
 def upload_pipe_test(arg):
@@ -50,7 +64,12 @@ def upload_pipe_test(arg):
     url = url.strip()
     usage_time = round(end_time - start_time, 2)
     print('upload time: {}s'.format(usage_time))
-    pyperclip.copy(url)
+
+    try:
+        pyperclip.copy(url)
+    except NameError:
+        pass
+
     return url
 
 # opt
