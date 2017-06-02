@@ -1,9 +1,9 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 
 import argparse
+from configparser import ConfigParser
 import requests
 import sys
-from configparser import ConfigParser
 from time import time
 
 try:
@@ -19,15 +19,16 @@ img_server = cfg.get(server, 'img_server')
 text_server = cfg.get(server, 'text_server')
 parameter = cfg.get(server, 'arg')
 
+
 def upload_img(file, arg):
     with open(file, 'rb') as f:
         start_time = time()
-        ufile = requests.post(img_server, files={arg: f.read(), 'content_type': 'application/octet-stream'})
+        ufile = requests.post(img_server, files={arg: f.read(),
+                                                 'content_type': 'application/octet-stream'})
         end_time = time()
         url = ufile.text.split()[-1]
         usage_time = round(end_time - start_time, 2)
         print('upload time: {}s'.format(usage_time))
-        #url = url.strip()
 
         try:
             pyperclip.copy(url)
@@ -36,11 +37,13 @@ def upload_img(file, arg):
 
         return url
 
+
 def upload_text(file, arg):
     postfix = file.split('.')[-1]
     with open(file, 'r') as f:
         start_time = time()
-        ufile = requests.post(text_server, data={arg: f.read(),  'content_type': 'application/octet-stream'})
+        ufile = requests.post(text_server, data={arg: f.read(),
+                                                 'content_type': 'application/octet-stream'})
         end_time = time()
         url = ufile.text
         url = url.strip()
@@ -55,10 +58,12 @@ def upload_text(file, arg):
 
         return url
 
+
 def upload_pipe_test(arg):
     args = sys.stdin
     start_time = time()
-    ufile = requests.post(text_server, data={arg: args.read(),  'content_type': 'application/octet-stream'})
+    ufile = requests.post(text_server, data={arg: args.read(),
+                                             'content_type': 'application/octet-stream'})
     end_time = time()
     url = ufile.text
     url = url.strip()
