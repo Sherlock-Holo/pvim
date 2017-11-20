@@ -94,13 +94,17 @@ parser.add_argument('-t', '--text', help='upload codes text')
 parser.add_argument('-p', '--picture', help='upload picture')
 #parser.add_argument('--pipe',action='store_true' , help='upload from pipe')
 
-args = parser.parse_args()
+def main():
+    args = parser.parse_args()
 
-if args.picture:
-    print(upload_img(args.picture, parameter))
+    if args.picture:
+        print(upload_img(args.picture, parameter))
 
-elif args.text:
-    print(upload_text(args.text, parameter))
+    elif args.text:
+        print(upload_text(args.text, parameter))
 
-else:
-    print(upload_pipe_test(parameter))
+    else:
+        print(upload_pipe_test(parameter))
+
+if __name__ == '__main__':
+    main()
